@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block content %}
+<h1>Purchase product</h1>
+<form action="/purchase" method="post">
+    {% csrf_token %}
+    {{attempt_form}}
+    <input type="submit" value="Submit">
+</form>
+
+
+<h1>Add new product</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h1>All products</h1>
+<ul>
+    {% for product in products %}
+    <li>Name: {{ product.name }} Price: {{product.price}} Quantity: {{product.quantity}} <button><a href="/delete_product/{{product.id}}">Delete</a></button></li>
+    {% endfor %}
+</ul>
+
+<h1>All attempts</h1>
+<ul>
+    {% for attempt in attempts %}
+    <li>Coins inserted: {{ attempt.coins_inserted }} Product Selected: {{attempt.product_selected.name}} Price:{{attempt.product_selected.price}} Quantity: {{attempt.product_selected.quantity}}</li>
+    {% endfor %}
+</ul>
+
+
+<h1>All purchases</h1>
+<ul>
+    {% for purchase in purchases %}
+    <li>{{purchase}}</li>
+    {% endfor %}
+
+</ul>
+
+{% endblock content %}
